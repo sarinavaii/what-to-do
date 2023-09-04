@@ -6,15 +6,24 @@ import { getProjects } from '@core/services/api';
 import { useQuery } from '@tanstack/react-query';
 
 const ProjectsListOrganism = () => {
-    const { isLoading, isError, error, isSuccess, data } = useQuery({
+    const { isLoading, isError, data } = useQuery({
         queryKey: ['projects'],
-        queryFn: () => getProjects()
+        queryFn: () => getProjects(),
+        cacheTime: 1000 * 3600
     });
+
+    if (isLoading) {
+        return <div>Loading data...</div>;
+    }
+
+    if (isError) {
+        return <div>Something went wrong...</div>;
+    }
 
     return (
         <div className="text-white">
-            {[1, 2, 3, 4].map((item) => {
-                return <Project />;
+            {data.data.map((project) => {
+                return <Project project={project} key={project.id} />;
             })}
         </div>
     );

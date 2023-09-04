@@ -1,3 +1,3 @@
 import ProjectsListOrganism from './ProjectsOrganisms/ProjectListOrganism/ProjectsListOrganism';
-
-export { ProjectsListOrganism };
+import AddProjectOrganism from './ProjectsOrganisms/AddProjectOrganism/AddProjectOrganism';
+export { ProjectsListOrganism, AddProjectOrganism };
