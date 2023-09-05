@@ -5,6 +5,8 @@ import { TbLayoutGridAdd } from 'react-icons/tb';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { addProject } from '@core/services/api';
 
 const AddProjectOrganism = () => {
     const schema = yup
@@ -24,8 +26,13 @@ const AddProjectOrganism = () => {
         resolver: yupResolver(schema)
     });
 
-    const addProject = async (data) => {
+    const addProjectMutation = useMutation({
+        mutationFn: (data) => addProject(data)
+    });
+
+    const handleAddProject = async (data) => {
         console.log(data);
+        addProjectMutation.mutate(data);
     };
 
     return (
@@ -39,7 +46,7 @@ const AddProjectOrganism = () => {
 
             <Modal id={'add_project'} title="Add Project">
                 <div className="mb-3">Please enter the name of your project</div>
-                <form onSubmit={handleSubmit(addProject)} className="flex">
+                <form onSubmit={handleSubmit(handleAddProject)} className="flex">
                     <input
                         className="grow bg-white border-none text-black p-4 !outline-none rounded-tl rounded-bl"
                         {...register('name')}
