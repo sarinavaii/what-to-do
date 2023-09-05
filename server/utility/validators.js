@@ -8,7 +8,6 @@ const validate = (schema) => async (req, res, next) => {
         );
         return next();
     } catch (error) {
-        console.log(error.errors);
         const errors = {};
         error.inner.map((field) => {
             errors[field.path.replace("body.", "")] = field.errors;

@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { TbTrashXFilled, TbEdit } from 'react-icons/tb';
 
-const Project = ({ project }) => {
+const Project = ({ project, index }) => {
     return (
         <div className="flex mb-4 items-center gap-4">
-            <span className="aspect-square w-10 rounded-full bg-yellow-500 flex items-center justify-center">1</span>
+            <span className="aspect-square w-10 rounded-full bg-yellow-500 flex items-center justify-center">
+                {index + 1}
+            </span>
             <Link href={`/tasks/${project.id}`} className="grow">
                 {project.name}
             </Link>

@@ -4,11 +4,13 @@ import { Modal } from '@components/atoms';
 import { TbLayoutGridAdd } from 'react-icons/tb';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
-import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addProject } from '@core/services/api';
+import { useRouter } from 'next/navigation';
 
 const AddProjectOrganism = () => {
+    const queryClient = useQueryClient();
     const schema = yup
         .object({
             name: yup.string().required('Project name is required')
@@ -18,6 +20,7 @@ const AddProjectOrganism = () => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors }
     } = useForm({
         defaultValues: {
@@ -31,13 +34,18 @@ const AddProjectOrganism = () => {
     });
 
     const handleAddProject = async (data) => {
-        console.log(data);
-        addProjectMutation.mutate(data);
+        addProjectMutation.mutate(data, {
+            onSuccess: () => {
+                reset();
+                window.add_project.close();
+                queryClient.invalidateQueries();
+            }
+        });
     };
 
     return (
         <>
-            <button onClick={() => window.add_project.showModal()} className="flex items-center gap-4 mb-4">
+            <button onClick={() => window.add_project.show()} className="flex items-center gap-4 mb-4">
                 <span className="aspect-square w-10 rounded-full bg-emerald-600 text-xl flex items-center justify-center">
                     <TbLayoutGridAdd />
                 </span>
@@ -55,7 +63,7 @@ const AddProjectOrganism = () => {
                         Add
                     </button>
                 </form>
-                {errors && <div className="text-red-400 text-sm">{errors.name?.message}</div>}
+                {errors.name && errors.name.map((error) => <div className="text-red-400 text-sm">{error}</div>)}
             </Modal>
         </>
     );

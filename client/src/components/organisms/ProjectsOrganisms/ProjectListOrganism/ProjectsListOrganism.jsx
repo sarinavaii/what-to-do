@@ -8,8 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 const ProjectsListOrganism = () => {
     const { isLoading, isError, data } = useQuery({
         queryKey: ['projects'],
-        queryFn: () => getProjects(),
-        cacheTime: 1000 * 3600
+        queryFn: () => getProjects()
     });
 
     if (isLoading) {
@@ -22,8 +21,8 @@ const ProjectsListOrganism = () => {
 
     return (
         <div className="text-white">
-            {data.data.map((project) => {
-                return <Project project={project} key={project.id} />;
+            {data.data.map((project, index) => {
+                return <Project project={project} key={project.id} index={index} />;
             })}
         </div>
     );
