@@ -53,10 +53,11 @@ const Project = ({ project, index }) => {
 
     const handleUpdateProject = async (data) => {
         updateProjectMutation.mutate(data, {
-            onSuccess: () => {
+            onSuccess: (data) => {
                 reset();
                 window[`update_project_${project.id}`].close();
                 queryClient.invalidateQueries();
+                toast.success(data.message);
             }
         });
     };

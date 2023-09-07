@@ -7,7 +7,7 @@ const getAllProjects = async (req, res) => {
                 id: "asc",
             },
         });
-        res.status(200).json({ message: "success", data: projects });
+        res.status(200).json({ message: "Items successfully fetched.", data: projects });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
@@ -22,7 +22,7 @@ const addProject = async (req, res) => {
                 name,
             },
         });
-        res.status(200).json({ message: "success", data: project });
+        res.status(200).json({ message: "Item successfully added.", data: project });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
