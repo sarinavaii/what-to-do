@@ -1,10 +1,9 @@
 'use client';
 
 import { Modal } from '@components/atoms';
-import { deleteProject } from '@core/services/api';
+import { deleteProject, updateProject } from '@core/services/api';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import updateProject from '@core/services/api/projects/update-project.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { TbTrashXFilled, TbEdit, TbLoader } from 'react-icons/tb';

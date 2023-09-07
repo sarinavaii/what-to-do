@@ -11,8 +11,10 @@ app.use(bodyParser.json());
 
 // routes
 const projectsRoutes = require("./routes/projects-routes");
+const TasksRoutes = require("./routes/tasks-routes");
 
 app.use("/projects", projectsRoutes);
+app.use("/project", TasksRoutes);
 
 app.listen(port, () => {
     console.log(`server started on port ${port}`);
