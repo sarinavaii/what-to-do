@@ -1,10 +1,11 @@
 'use client';
 
-import { TaskListOrganism } from '@components/organisms';
+import { AddTaskOrganism, TaskListOrganism } from '@components/organisms';
 import { getTasks } from '@core/services/api';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import { TbLoader } from 'react-icons/tb';
+import { TbChevronLeft, TbLoader } from 'react-icons/tb';
 
 function TasksTemplate() {
     const params = useParams();
@@ -27,8 +28,14 @@ function TasksTemplate() {
 
     return (
         <div className="p-8">
-            <h1 className="text-yellow-500 text-2xl mb-2 font-bold uppercase">{data.data.name}</h1>
+            <div className=" flex gap-2 items-center text-2xl mb-2 font-bold uppercase">
+                <Link href="/" className="text-3xl pr-2 text-white">
+                    <TbChevronLeft />
+                </Link>
+                <h1>{data.data.name} Tasks</h1>
+            </div>
             <hr className="border-dashed mb-4" />
+            <AddTaskOrganism params={params} />
             <TaskListOrganism tasks={data.data.tasks} />
         </div>
     );

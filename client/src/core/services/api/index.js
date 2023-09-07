@@ -3,5 +3,6 @@ import addProject from './projects/add-project.api';
 import deleteProject from './projects/delete-project.api';
 import updateProject from './projects/update-project.api';
 import getTasks from './tasks/get-tasks.api';
+import addTask from './tasks/add-task.api';
 
-export { getProjects, deleteProject, addProject, updateProject, getTasks };
+export { getProjects, deleteProject, addProject, updateProject, getTasks, addTask };

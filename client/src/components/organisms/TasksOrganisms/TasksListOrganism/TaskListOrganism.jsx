@@ -3,8 +3,8 @@ import { Task } from '@components/molecules';
 const TaskListOrganism = ({ tasks }) => {
     return (
         <div className="text-white">
-            {tasks.map((project, index) => {
-                return <Task project={project} key={project.id} index={index} />;
+            {tasks.map((task, index) => {
+                return <Task task={task} key={task.id} index={index} />;
             })}
         </div>
     );

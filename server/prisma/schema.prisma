@@ -12,15 +12,14 @@ datasource db {
 
 model Projects {
   id    Int     @id @default(autoincrement())
-  name  String?
+  name  String
   tasks Tasks[]
 }
 
 model Tasks {
-  id                 Int       @id @default(autoincrement())
-  name               String
-  comepletedDateTime DateTime?
-  order              Int?
-  Projects           Projects? @relation(fields: [projectsId], references: [id])
-  projectsId         Int?
+  id         Int       @id @default(autoincrement())
+  name       String
+  completed  Boolean   @default(false)
+  Projects   Projects? @relation(fields: [projectsId], references: [id])
+  projectsId Int?
 }
