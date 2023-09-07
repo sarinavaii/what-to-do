@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { addProject } from '@core/services/api';
-import { useRouter } from 'next/navigation';
 
 const AddProjectOrganism = () => {
     const queryClient = useQueryClient();
