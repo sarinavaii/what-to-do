@@ -3,8 +3,7 @@
 import { deleteProject } from '@core/services/api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useState } from 'react';
-import { TbTrashXFilled, TbEdit } from 'react-icons/tb';
+import { TbTrashXFilled, TbEdit, TbLoader } from 'react-icons/tb';
 import { toast } from 'react-toastify';
 
 const Project = ({ project, index }) => {
@@ -13,9 +12,9 @@ const Project = ({ project, index }) => {
         mutationFn: (data) => deleteProject(data)
     });
 
-    const handleDeleteProject = async (data) => {
+    const handleDeleteProject = async (id) => {
         deleteProjectMutation.mutate(
-            { id: +data },
+            { id: +id },
             {
                 onSuccess: (data) => {
                     toast.info(data.message);
@@ -33,17 +32,20 @@ const Project = ({ project, index }) => {
             <Link href={`/tasks/${project.id}`} className="grow">
                 {project.name}
             </Link>
-            <button>
-                <TbEdit className="text-blue-400 text-xl" />
-            </button>
 
-            <button
-                disabled={deleteProjectMutation.isLoading}
-                className="text-red-400 text-xl disabled:text-gray-400"
-                onClick={() => handleDeleteProject(project.id)}
-            >
-                <TbTrashXFilled />
-            </button>
+            {deleteProjectMutation.isLoading ? (
+                <TbLoader className="animate-spin text-xl" />
+            ) : (
+                <>
+                    <button>
+                        <TbEdit className="text-blue-400 text-xl" />
+                    </button>
+
+                    <button className="text-red-400" onClick={() => handleDeleteProject(project.id)}>
+                        <TbTrashXFilled />
+                    </button>
+                </>
+            )}
         </div>
     );
 };
