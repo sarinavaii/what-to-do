@@ -1,5 +1,6 @@
 'use client';
 
+import { TaskListOrganism } from '@components/organisms';
 import { getTasks } from '@core/services/api';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
@@ -28,6 +29,7 @@ function TasksTemplate() {
         <div className="p-8">
             <h1 className="text-yellow-500 text-2xl mb-2 font-bold uppercase">{data.data.name}</h1>
             <hr className="border-dashed mb-4" />
+            <TaskListOrganism tasks={data.data.tasks} />
         </div>
     );
 }
