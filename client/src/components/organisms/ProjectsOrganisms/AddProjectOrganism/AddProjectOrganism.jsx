@@ -51,7 +51,7 @@ const AddProjectOrganism = () => {
                 Add a new project
             </button>
 
-            <Modal id={'add_project'} title="Add Project">
+            <Modal id="add_project" title="Add Project">
                 <div className="mb-3">Please enter the name of your project</div>
                 <form onSubmit={handleSubmit(handleAddProject)} className="flex">
                     <input
@@ -62,7 +62,7 @@ const AddProjectOrganism = () => {
                         Add
                     </button>
                 </form>
-                {errors.name && errors.name.map((error) => <div className="text-red-400 text-sm">{error}</div>)}
+                {errors.name && <div className="text-red-400 text-sm">{errors.name.message}</div>}
             </Modal>
         </>
     );
